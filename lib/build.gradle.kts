@@ -24,6 +24,8 @@ dependencyManagement {
 dependencies {
     // https://mvnrepository.com/artifact/org.springframework/spring-jdbc
     implementation("org.springframework:spring-jdbc")
+    implementation("com.fasterxml.jackson.core:jackson-core")
+    compileOnly("org.projectlombok:lombok")
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.assertj:assertj-core")
 }

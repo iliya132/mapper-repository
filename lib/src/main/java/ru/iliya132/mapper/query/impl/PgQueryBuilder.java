@@ -25,6 +25,7 @@ public class PgQueryBuilder implements QueryBuilder {
     private String groupBy;
     private String having;
     private String title;
+    private String returning;
 
 
     @Override
@@ -107,6 +108,12 @@ public class PgQueryBuilder implements QueryBuilder {
     }
 
     @Override
+    public QueryBuilder setReturning(String returning) {
+        this.returning = returning;
+        return this;
+    }
+
+    @Override
     public String build() {
         validate();
         builder = new StringBuilder();
@@ -143,6 +150,7 @@ public class PgQueryBuilder implements QueryBuilder {
         appendLine();
         appendUpdateSet();
         appendWhere();
+        appendReturning();
         appendSemicolon();
         return builder.toString();
     }
@@ -166,6 +174,10 @@ public class PgQueryBuilder implements QueryBuilder {
                 .map(it -> "%s=:%s".formatted(it, it))
                 .collect(Collectors.joining(", ")));
         appendLine();
+    }
+
+    private void appendReturning() {
+        doIfNotEmpty(returning, returning -> appendLine("RETURNING ", returning));
     }
 
     private void appendTitle() {

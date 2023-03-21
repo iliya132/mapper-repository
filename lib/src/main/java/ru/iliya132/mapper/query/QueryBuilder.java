@@ -8,6 +8,7 @@ public interface QueryBuilder {
     QueryBuilder update();
     QueryBuilder delete();
     QueryBuilder setColumns(List<String> columns);
+    QueryBuilder setReturning(String returning);
 
     QueryBuilder setFrom(String from, String alias);
     QueryBuilder appendJoin(String join);
